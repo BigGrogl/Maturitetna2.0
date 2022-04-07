@@ -1,34 +1,81 @@
-public class Logic {
-    public static String alpha ="abcdefghijklmnopqrstuvwxyz ";
+public class Logic{
+    public static int lower = 32;
+    public static int upper = 126;
+    public static char[] cipherTable = cipherAlpha();
+
     public static void main(String[] args){
-
+        
     }
 
-    public static String Encode(String input, int Key){
-        input = input.toLowerCase();
-        String encripted = "";
-        for(int i = 0; i < input.length(); i++){
-            int pos = alpha.indexOf(input.charAt(i));
-            int key = (Key+pos)%26;
-            char replace = alpha.charAt(key);
-            encripted += replace;
+    public static char[] cipherAlpha(){
+        char[] alpha = new char[(upper-lower)+1];
+        for (int i = lower; i <= upper; i++) {
+            alpha[i - lower] = (char) i;
         }
-        return encripted;
+        return alpha;
     }
 
-    public static String Decode(String input, int Key){
-        input = input.toLowerCase();
-        String decripted = "";
-        for(int i = 0; i < input.length(); i++){
-            int pos = alpha.indexOf(input.charAt(i));
-            int key = (pos-Key)%26;
-            if(key < 0){
-                key=alpha.length()+key;
+    public static String encode(String input, String key){
+        StringBuilder builder = new StringBuilder(input.length());
+            int keyIndex = 0;
+            for (int i = 0; i < input.length(); i++) {
+                char c = input.charAt(i);
+                int pos = (int) c;
+                if (pos < lower || pos > upper) {
+                    builder.append(c);
+                } else {
+                    char k = key.charAt(keyIndex);
+                    pos = getCharacterPosition(c);
+                    int pos2 = getCharacterPosition(k);
+                    int sum = (pos + pos2) % cipherTable.length;
+                    builder.append(getCharacter(sum));
+                    keyIndex = ++keyIndex % key.length();
+                }
             }
-            char replace = alpha.charAt(key);
-            decripted += replace;
-        }
-        return decripted;
+            return builder.toString();
     }
 
+    public static String decode(String cipher, String key) {
+        StringBuilder builder = new StringBuilder(cipher.length());
+        int keyIndex = 0;
+        for (int i = 0; i < cipher.length(); i++) {
+            char c = cipher.charAt(i);
+            int pos = (int) c;
+            if (pos < lower || pos > upper) {
+                builder.append(c);
+            } else {
+                char k = key.charAt(keyIndex);
+                pos = getCharacterPosition(c);
+                int pos2 = getCharacterPosition(k);
+                int sum = pos - pos2;
+                while (sum < 0) {
+                    sum += cipherTable.length;
+                }
+                sum = sum % cipherTable.length;
+                builder.append(getCharacter(sum));
+                keyIndex = ++keyIndex % key.length();
+            }
+        }
+        return builder.toString();
+    }
+
+    public static int getCharacterPosition(char c) {
+        for (int i = 0; i < cipherTable.length; i++) {
+            if (c == cipherTable[i]) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public static char getCharacter(int index) {
+        if (index >= 0 && index < cipherTable.length) {
+            return cipherTable[index];
+        } else {
+            return '?';
+        }
+    }
+
+    
 }
