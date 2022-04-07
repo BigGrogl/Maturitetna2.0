@@ -1,5 +1,5 @@
 public class Logic {
-    public static String alpha ="abcdefghijklmnopqrstuvwxyz ";
+    public static String alpha =" abcdefghijklmnopqrstuvwxyz";
     public static void main(String[] args){
 
     }
