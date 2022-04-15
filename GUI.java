@@ -3,7 +3,6 @@ import java.io.*;
 import java.nio.*;
 
 public class GUI {
-
     public static File selectedFile;
     public static void main(String[] args){
         JFrame frame = new JFrame("TEST GUI");
@@ -34,13 +33,6 @@ public class GUI {
         frame.getContentPane().add(panel);
         frame.setVisible(true);
 
-    }
-
-    public static String path(){
-        return selectedFile.getAbsolutePath();
-    }
-    public static String pathWrite(){
-        return path.substring(0, path.lastIndexOf(File.separator));
     }
     
 }
