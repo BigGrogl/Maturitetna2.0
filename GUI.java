@@ -34,5 +34,12 @@ public class GUI {
         frame.setVisible(true);
 
     }
-    
+    public static String filePath(){
+        return selectedFile.getAbsolutePath();
+    }
+    public static String genericPath(){
+        String path = selectedFile.getAbsolutePath();
+        String genericPath = path.substring(0, path.lastIndexOf("\\"));
+        return genericPath;
+    }
 }
