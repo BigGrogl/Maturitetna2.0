@@ -1,9 +1,13 @@
 import javax.swing.*;
+
+import javafx.event.ActionEvent;
+
 import java.io.*;
 import java.nio.*;
 
 public class GUI {
     public static File selectedFile;
+    private final static String newline = "\n";
     public static void main(String[] args){
         JFrame frame = new JFrame("TEST GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -11,16 +15,22 @@ public class GUI {
 
         JButton buttonEncode = new JButton("Encode");
         JButton buttonDecode = new JButton("Decode");
+        JTextField input = new JTextField(15);
 
-       /* frame.getContentPane().add(buttonEncode);
+        frame.getContentPane().add(buttonEncode);
         frame.getContentPane().add(buttonDecode);
-        frame.setVisible(true);*/
+        frame.getContentPane().add(input);
+        frame.setVisible(true);
 
         JPanel panel = new JPanel();
         panel.add(buttonEncode);
         panel.add(buttonDecode);
+        panel.add(input);
 
         JPanel panelDown = new JPanel();
+
+        
+        
         
 
         JFileChooser fileChooser = new JFileChooser();
@@ -42,4 +52,5 @@ public class GUI {
         String genericPath = path.substring(0, path.lastIndexOf("\\"));
         return genericPath;
     }
+    
 }
