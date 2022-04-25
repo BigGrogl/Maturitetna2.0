@@ -26,17 +26,11 @@ public class Main {
         
         System.out.printf("%nVnesi kljucno besedo: ");
         key = bralnik.nextLine();
-        System.out.printf("Izberite funkcijo (Encript/Decript)! ");
-        String funkcija = bralnik.next();
+        String funkcija = GUI.method();
         if(funkcija.equals("Encript")){
         Reader.Write(Logic.encodeLoop(Reader.Read(pathPlain), key), pathCripted);
         }else if(funkcija.equals("Decript")){
         Reader.Write(Logic.decodeLoop(Reader.Read(pathCripted), key), pathDecripted);
-            if(Reader.Read(pathPlain).equals(Reader.Read(pathDecripted))){
-                System.out.println("DELA!");
-            }else{
-                System.out.println("NE DELA!");
-            }
         }
     }
 }
