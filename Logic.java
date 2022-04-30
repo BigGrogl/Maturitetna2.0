@@ -8,19 +8,19 @@ public class Logic{
     }
 
     public static String encodeLoop(String plain, String key){
-        int keyInt = key.length();
+        //int keyInt = key.length();
         String cripted = plain;
 
             cripted = encodeVige(cripted, key);
-            cripted = encodeCaesar(cripted, keyInt);     
+            //cripted = encodeCaesar(cripted, keyInt);     
         return cripted;
     }
 
     public static String decodeLoop(String cripted, String key){
-        int keyInt = key.length();
+        //int keyInt = key.length();
         String plain = cripted;
 
-        plain = decodeCaesar(cripted, keyInt);
+        //plain = decodeCaesar(cripted, keyInt);
         plain = decodeVige(cripted, key);
         
         return plain;
