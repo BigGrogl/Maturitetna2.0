@@ -17,7 +17,8 @@ public class MyFrame extends JFrame implements ActionListener{
     String pathPlain = "";
     public static File selectedFile;
     MyFrame(){
-        JFileChooser fileChooser = new JFileChooser("D:\\GIT\\Maturitetna2.0\\");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
         int result = fileChooser.showOpenDialog(this);
             if(result == JFileChooser.APPROVE_OPTION){
                 selectedFile = fileChooser.getSelectedFile();
@@ -53,12 +54,12 @@ public class MyFrame extends JFrame implements ActionListener{
         if(e.getSource()==encode){
             method="encode";
             keyword = input.getText();
-            Reader.Write(Logic.encodeLoop(Reader.Read(filePath),keyword), pathPlain.concat("\\Cripted.txt"));
+            Reader.Write(Logic.encode(Reader.Read(filePath),keyword), pathPlain.concat("\\Cripted.txt"));
         }
         else if(e.getSource()==decode){
             method="decode";
             keyword = input.getText();
-            Reader.Write(Logic.decodeLoop(Reader.Read(filePath),keyword), pathPlain.concat("\\Decripted.txt"));
+            Reader.Write(Logic.decode(Reader.Read(filePath),keyword), pathPlain.concat("\\Decripted.txt"));
         }
         
     }
